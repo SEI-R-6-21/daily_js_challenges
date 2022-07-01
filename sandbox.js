@@ -1,18 +1,14 @@
-function charCount(string) {
-  const result = {};
-  for (let i = 0; i < string.length; i++) {
-    let character = string.charAt(i);
-    if (result[character]) {
-      result[character]++;
-    } else {
-      result[character] = 1;
-    }
-  }
-  console.log(result);
-  return result;
+function formatWithPadding(n, char, length) {
+  const padding = char.repeat(length);
+  return (length > n.toString().length) ? padding + n : n.toString();
+  // if (length < n.toString().length) {
+  //   return n.toString();
+  // } else {
+  //   return padding + n;
+  // }
 }
 
-charCount('Today is fantastic!');
-// { T: 1, o: 1, d: 1, a: 3, y: 1,
-// ' ': 2, i: 2, s: 2, f: 1, n: 1,
-// t: 2, c: 1, '!': 1 }
+
+console.log(formatWithPadding(123, '0', 5)); //=> "00123"
+console.log(formatWithPadding(42, '*', 10)); //=> "********42"
+console.log(formatWithPadding(1234, '*', 3)); //=> "1234"
