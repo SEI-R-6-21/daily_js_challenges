@@ -586,6 +586,23 @@ isPrime(200) //=> false
 // Your solution for 20-isPrime here:
 function isPrime(n) {
   //remember, checking if n is prime, not a list of primes!
+  if (n < 2 || !Number.isInteger(n)) {
+    return false
+  } else if (n === 2) {
+    return true
+  } else {
+    let countDivisor = 0
+    for (let i=2; i<n; i++) {
+      if (n % i === 0) {
+        countDivisor++
+      }
+    }
+    if (countDivisor === 0) {
+      return true
+    } else {
+      return false
+    }
+  }
 }
 /*-----------------------------------------------------------------
 Challenge: 21-primeFactors
@@ -610,7 +627,25 @@ primeFactors(105) //=> [3, 5, 7]
 primeFactors(200) //=> [2, 2, 2, 5, 5]
 -----------------------------------------------------------------*/
 // Your solution for 21-primeFactors here:
-function primeFactors(n) {}
+function primeFactors(n) {
+  let primeFactorArr = []
+  if ( n < 2 || !Number.isInteger(n)) {
+    return []
+  } else {
+    let primeNum = 2
+    //if a number is divisible by any even number, it will be divisible by some number of 2's. 
+    while (n >= (primeNum*primeNum)) {
+      if (Number.isInteger(n/primeNum)) {
+        primeFactorArr.push(primeNum)
+        n = n/primeNum
+      } else {
+        primeNum++
+      }
+    }
+    primeFactorArr.push(n)
+    return primeFactorArr
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 22-intersection
 
@@ -619,7 +654,7 @@ Difficulty: Intermediate
 Prompt:
 
 - Write a function named intersection that accepts two arguments which are both arrays.  The array arguments may contain any mixture of strings, numbers and/or booleans - but no reference types, i.e., objects.
-- The function should return a new array containing all elements in common, including repeating element values.
+- The function shtempArr2.splice([itemIndex],1)ould return a new array containing all elements in common, including repeating element values.
 - The ordering of the elements in the returned is not important.
 - If there are no elements in the arrays in common,  the intersection function should return an empty array.
 - The function should not mutate (change) either argument.
@@ -631,7 +666,20 @@ intersection(['a', 1], [true, 'a', 15]) //=> ['a']
 intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 -----------------------------------------------------------------*/
 // Your solution for 22-intersection here:
-function intersection(arr1, arr2) {}
+function intersection(arr1, arr2) {
+  let resultArr = [];
+  //to be able to do the repeat correctly, i need a mutable copy of arr2 to remove values already matched
+  let tempArr2 = arr2;
+  let itemIndex;
+  for (let i=0; i<arr1.length; i++) {
+    itemIndex = tempArr2.indexOf(arr1[i]);
+    if (itemIndex > -1) {
+      let itemValue = tempArr2.splice([itemIndex],1)[0];
+      resultArr.push(itemValue);
+    }
+  }
+  return resultArr;
+}
 /*-----------------------------------------------------------------
 Challenge: 23-balancedBrackets
 
@@ -653,7 +701,47 @@ balancedBrackets( '[(])' ) // => false
 balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here:
-function balancedBrackets(string) {}
+function balancedBrackets(string) {
+  if (string.length < 2 || string.length % 2 === 1) {
+    return false;
+  } else {
+    let stringArr = [...string];
+    let maxpoint = stringArr.length;
+    for (let i=0; i<maxpoint; i++) {
+      // start at begining, look for closing to count back from.
+      switch(stringArr[i]){
+        case ')':
+          if(stringArr[i-1] !== '(') {
+            return false
+          } else {
+            stringArr.splice(i-1, 2)
+            i=0
+            maxpoint=stringArr.length
+          }
+          break
+        case ']':
+          if(stringArr[i-1] !== '[') {
+            return false
+          } else {
+            stringArr.splice(i-1, 2)
+            i=0
+            maxpoint=stringArr.length
+          }
+          break
+        case '}':
+          if(stringArr[i-1] !== '{') {
+            return false
+          } else {
+            stringArr.splice(i-1, 2)
+            i=0
+            maxpoint=stringArr.length
+          }
+          break
+      }
+    }
+    return stringArr.length === 0 ? true : false
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 24-isWinningTicket
 
@@ -679,7 +767,16 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 100], ['Hello', 108] ] ) // => true
 isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 -----------------------------------------------------------------*/
 // Your solution for 24-isWinningTicket here:
-function isWinningTicket(arr) {}
+function isWinningTicket(arr) {
+  let winTicket = true;
+  for (let i=0; i<arr.length; i++){
+    searchChar = String.fromCharCode(arr[i][1]);
+    if(!arr[i][0].includes(searchChar)) {
+      winTicket = false;
+    }
+  }
+  return winTicket;
+}
 /*-----------------------------------------------------------------
 Challenge: 25-getNumForIP
 
@@ -705,7 +802,17 @@ getNumForIP( '192.156.99.15' ) // => 3231474447
 getNumForIP( '10.0.0.1' ) // => 167772161
 -----------------------------------------------------------------*/
 // Your solution for 25-getNumForIP here:
-function getNumForIP(bits) {}
+function getNumForIP(bits) {
+  let ipArr = bits.split('.');
+  let j = 3;
+  let ipNum = 0;
+  for (let i=0; i<ipArr.length; i++) {
+    let ipPart = (ipArr[i] * (256 ** j));
+    ipNum += ipPart;
+    j--;
+  }
+  return ipNum;
+}
 /*-----------------------------------------------------------------
 Challenge: 26-toCamelCase
 
