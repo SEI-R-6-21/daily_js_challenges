@@ -837,7 +837,21 @@ toCamelCase( 'Mama-mia' ) // => 'MamaMia'
 toCamelCase( 'A_b_c' ) // => 'ABC'
 -----------------------------------------------------------------*/
 // Your solution for 26-toCamelCase here:
-function toCamelCase(string) {}
+function toCamelCase(string) {
+  //
+  const re = /[-_]/
+  let strArr = string.split(re)
+  let newCaseArr = [strArr[0]];
+  for (i=1; i<strArr.length; i++) {
+    let newLowerStr = strArr[i].toLowerCase()
+    let newStrArr= newLowerStr.split('')
+    newStrArr[0] = newStrArr[0].toUpperCase()
+    let newStr = newStrArr.join('')
+    newCaseArr.push(newStr)
+  }
+  let newCaseStr = newCaseArr.join('')
+  return newCaseStr
+}
 /*-----------------------------------------------------------------
 Challenge: 27-countTheBits
 
@@ -863,7 +877,12 @@ countTheBits( 255 ) //=> 8
 countTheBits( 65535 )  //=> 16
 -----------------------------------------------------------------*/
 // Your solution for 27-countTheBits here:
-function countTheBits(n) {}
+function countTheBits(n) {
+  let binaryStr = n.toString(2)
+  let oneCount = 0
+  binaryStr.split('').forEach((num) => (num === '1' && oneCount++))
+  return oneCount
+}
 /*-----------------------------------------------------------------
 Challenge: 28-gridTrip
 
@@ -871,11 +890,11 @@ Difficulty:  Intermediate
 
 Prompt:
 
-- This challenge uses an imaginary grid where the x coordinate increases when you move 'up' and decreases when you move 'down'.  Similarly, the y coordinate increases when you move 'right' and decreases when you move 'left'.
+- This challenge uses an imaginary grid where the y coordinate increases when you move 'up' and decreases when you move 'down'.  Similarly, the x coordinate increases when you move 'right' and decreases when you move 'left'.
 - Write a function called gridTrip that accepts two arguments.
-- The first argument is an array containing two integers.  The first represents the starting x position on the grid.  The second integer in the array represents the starting y position.
-- The second argument is a string representing "moves" using the characters 'U', 'D', 'R' & 'L' to represent moving Up, Down, Right & Left respectively.  Each direction character will be followed by digits representing how many units to move in that direction.  For example, a string of 'D15R2U4' represents moving up 15 units, to the right 2 units, and finally, down 4 units.  The direction characters will always be upper case.
-- The gridTrip function should return a new array of two integers: the final x position and the final y position.  Do not modify the array argument).
+- The first argument is an array containing two integers.  The first represents the starting y position on the grid.  The second integer in the array represents the starting x position.
+- The second argument is a string representing "moves" using the characters 'U', 'D', 'R' & 'L' to represent moving Up, Down, Right & Left respectively.  Each direction character will be followed by digits representing how many units to move in that direction.  For example, a string of 'D15R2U4' represents moving DOWN 15 units, to the right 2 units, and finally, UP 4 units.  The direction characters will always be upper case.
+- The gridTrip function should return a new array of two integers: the final y position and the final x position.  Do not modify the array argument).
 
 Hint:
 - Using the String.match method to return an array of regular expression matches can be helpful if you want to break the single string of moves into an array of distinct moves by direction.  Be sure to use the global flag, e.g. /cat/g, when defining the regexp.
@@ -887,7 +906,32 @@ gridTrip( [5, 10], 'D5L15U2' ) //-> [2, -5]
 gridTrip( [-22, 100], 'L2L15D50U1D9') //=> [-80, 83]
 -----------------------------------------------------------------*/
 // Your solution for 28-gridTrip here:
-function gridTrip(arr, string) {}
+function gridTrip(arr, string) {
+  let arrMod = arr
+  let re = /[DLRU]\d*/g;
+  let moveArr = string.match(re)
+  moveArr.forEach(element => {
+    let elementNum = parseInt(element.split(/[DLRU]/g)[1])
+    switch(element[0]) {
+      case 'D':
+        arrMod[0] -= elementNum
+        break
+      case 'L':
+        arrMod[1] -= elementNum
+        break
+      case 'R':
+        arrMod[1] += elementNum
+        break
+      case 'U':
+        arrMod[0] += elementNum
+        break
+      default:
+        console.log('an error occurred!')
+        return
+    }
+  });
+  return arrMod
+}
 /*-----------------------------------------------------------------
 Challenge: 29-addChecker
 
@@ -913,7 +957,23 @@ addChecker( [10, 15, 16, 22], 32 ) // => true
 addChecker( [10, 15, 16, 22], 19 ) // => false
 -----------------------------------------------------------------*/
 // Your solution for 29-addChecker here:
-function addChecker(arr, n) {}
+function addChecker(arr, n) {
+  let result = false
+  let index = 0;
+  let arrLength = arr.length
+  while (index < arrLength-1) {
+    let total = arr[index] + arr[arrLength-1]
+    if (total === n) {
+      result = true
+      break
+    } else if (total > n) {
+      arrLength--
+    } else if (total < n) {
+      index++
+    }
+  }
+  return result
+}
 /*-----------------------------------------------------------------
 Challenge: 30-totalTaskTime
 
