@@ -1001,7 +1001,30 @@ totalTaskTime( [2, 2, 3, 3, 4, 4], 2 ) //=> 9
 totalTaskTime( [5, 2, 6, 8, 7, 2], 3 ) // => 12
 -----------------------------------------------------------------*/
 // Your solution for 30- here:
-function totalTaskTime(arr, n) {}
+function totalTaskTime(arr, n) {
+  let threadArr = new Array(n).fill(0)
+  let cycleCount = 0
+  let continueLoop = true
+  if (arr.reduce((acc, val)=>{return acc+val},0) <= 0) {return 0}
+  while ((arr.length > 0) || continueLoop) {
+    for (let k = 0; k < threadArr.length; k++) {
+      if (threadArr[k]===0 && arr.length > 0){
+        nextTask = arr.shift()
+        threadArr[k] = nextTask
+      }
+    }
+    threadArr.forEach((num, index) => {
+      if (threadArr[index] > 0) {threadArr[index] -= 1}
+    })
+    let threadTaskSum =0
+    for (let val of threadArr) {
+      threadTaskSum += val
+    }
+    continueLoop = (threadTaskSum > 0) ? true : false
+    cycleCount++
+  }
+  return cycleCount
+}
 
 /*-----------------------------------------------------------------*/
 module.exports = {
