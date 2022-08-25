@@ -12,7 +12,9 @@ Examples:
 sayHello() //=> Hello!
 -----------------------------------------------------------------*/
 // Your solution for 00-sayHello (example) here:
-function sayHello() {}
+const sayHello = () => {
+  return `Hello!`
+}
 /*-----------------------------------------------------------------
 Challenge: 01-addOne
 
@@ -28,7 +30,9 @@ addOne(1) //=> 2
 addOne(-5) //=> -4
 -----------------------------------------------------------------*/
 // Your solution for 01-addOne here:
-function addOne(num) {}
+const addOne = (num) => {
+  return num + 1
+}
 /*-----------------------------------------------------------------
 Challenge: 02-addTwoNumbers
 
@@ -46,8 +50,15 @@ addTwoNumbers(10, -2) //=> 8
 addTwoNumbers(0, 0) //=> 0
 addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------*/
-// Your solution for 02-addTwoNumbers here:
-function addTwoNumbers(num1, num2) {}
+function addTwoNumbers(num1, num2) {
+  let sum
+  if (typeof num1 != 'number' || typeof num2 != 'number') {
+    return NaN
+  } else {
+    sum = num1 + num2
+    return sum
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 03-sumNumbers
 
@@ -66,7 +77,17 @@ sumNumbers([2, 10, -5]) //=> 7
 sumNumbers([]) //=> 0
 -----------------------------------------------------------------*/
 // Your solution for 03-sumNumbers here:
-function sumNumbers(nums) {}
+function sumNumbers(nums) {
+  let sum = 0
+  if (nums == []) {
+    return 0
+  } else {
+    for (let i = 0; i < nums.length; i++) {
+      sum += nums[i]
+    }
+    return sum
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 04-addList
 
@@ -85,7 +106,13 @@ add(1,50,1.23) //=> 52.23
 add(7,-12) //=> -5
 -----------------------------------------------------------------*/
 // Your solution for 04-addList here:
-function addList() {}
+function addList() {
+  let sum = 0
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i]
+  }
+  return sum
+}
 /*-----------------------------------------------------------------
 Challenge: 05-computeRemainder
 
@@ -105,7 +132,17 @@ computeRemainder(4,0) //=> Infinity
 computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
-function computeRemainder(n1, n2) {}
+function computeRemainder(n1, n2) {
+  let remainder
+  if (n2 == 0) {
+    return Infinity
+  } else {
+    while (n2 < n1 && n1 > 0) {
+      remainder = n1 - n2
+    }
+    return remainder
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 06-range
 
@@ -124,7 +161,16 @@ range(1,1) //=> []
 range(5,2) //=> "First argument must be less than second"
 -----------------------------------------------------------------*/
 // Your solution for 06-range here:
-function range(n1, n2) {}
+function range(n1, n2) {
+  array = []
+  if (n1 <= n2) {
+    for (let i = n1; i < n2; i++) {
+      array.push(i)
+    }
+  } else if (n1 > n2) {
+    return 'First argument must be less than second'
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 07-reverseUpcaseString
 
@@ -139,7 +185,13 @@ Examples:
 reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES" 
 -----------------------------------------------------------------*/
 // Your solution for 07-reverseUpcaseString here:
-function reverseUpcaseString(string) {}
+function reverseUpcaseString(string) {
+  let splitString = string.split("")
+  let array = splitString.reverse()
+  let joinArray = array.join("")
+  let revString = joinArray.toUpperCase()
+  return revString
+}
 /*-----------------------------------------------------------------
 Challenge: 08-removeEnds
 
@@ -156,7 +208,22 @@ removeEnds('SEI Rocks!'); //=> "DI Rocks"
 removeEnds('a'); //=> "" (empty string)
 -----------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
-function removeEnds(string) {}
+function removeEnds(string) {
+  if(string.length < 3) 
+  {
+    return ''
+  }
+  else {
+    let newString = ''
+    for (i = 1; i < string.length - 1; i++) {
+      newString += string.charAt(i)
+    }
+    return newString
+  }
+}
+// string = 'discovery'
+// removeEnds(string)
+// console.log(removeEnds(string))
 /*-----------------------------------------------------------------
 Challenge: 09-charCount
 
@@ -175,7 +242,22 @@ charCount('hello') //=> { h: 1, e: 1, l: 2, o: 1 }
 charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i: 2, s: 2, f: 1, n: 1, t: 2, c: 1, '!': 1 }
 -----------------------------------------------------------------*/
 // Your solution for 09-charCount here:
-function charCount(string) {}
+function charCount(string) {
+  let stringObj = {}
+  for(i = 0; i < string.length; i++) {
+
+      char = string.charAt(i)
+      if(stringObj[char]) {
+          stringObj[char++]
+      } else {
+          stringObj[char] = 1
+      }
+  }
+  return stringObj
+
+}
+// console.log(charCount(string))
+
 /*-----------------------------------------------------------------
 Challenge: 10-formatWithPadding
 
@@ -197,7 +279,9 @@ formatWithPadding(42, '*', 10); //=> "********42"
 formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
-function formatWithPadding(n, char, length) {}
+function formatWithPadding(n, char, length) {
+  
+}
 /*-----------------------------------------------------------------
 Challenge: 11-isPalindrome
 
