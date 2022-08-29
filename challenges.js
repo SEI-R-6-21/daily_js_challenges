@@ -128,21 +128,18 @@ Prompt:
 Examples:
 
 computeRemainder(10,2) //=> 0
+//n1/n2
 computeRemainder(4,0) //=> Infinity
 computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
 function computeRemainder(n1, n2) {
-  let remainder
   if (n2 == 0) {
-    return Infinity
-  } else {
-    while (n2 < n1 && n1 > 0) {
-      remainder = n1 - n2
-    }
-    return remainder
-  }
+    return Infinity;
+  } 
+  return n1 - Math.floor(n1 / n2) * n2
 }
+
 /*-----------------------------------------------------------------
 Challenge: 06-range
 
@@ -280,8 +277,18 @@ formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
 function formatWithPadding(n, char, length) {
-  
+  thirdArgLen = length        
+  n = String(n)
+  if (n.length >= thirdArgLen){
+      return n
+  }
+  else {
+      repValue = thirdArgLen - n.length
+      n = char.repeat(repValue) + n
+      return n
+  }
 }
+
 /*-----------------------------------------------------------------
 Challenge: 11-isPalindrome
 
@@ -302,7 +309,26 @@ isPalindrome('A nut for a jar of tuna'); //=> true
 isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
-function isPalindrome(string) {}
+function isPalindrome(string) {
+    
+  result = string.toLowerCase()
+  let arr = result.split(" ")
+  arr = arr.join("")
+  arr = arr.split("")
+  let revArr = []
+  for (let j = 0; j < arr.length - 1 ; j++) {
+      revArr[j] = arr[arr.length - 1 - j]
+  }
+
+  for( let i = 0; i < arr.length - 1; i++) {
+      if (arr[i] == revArr[i]) {
+      }
+      if (arr[i] != revArr[i]) {
+          return "false"
+      }
+  }
+  return "true"
+}
 /*-----------------------------------------------------------------
 Challenge: 12-hammingDistance
 
@@ -324,7 +350,15 @@ hammingDistance('!!!!', '****'); //=> 4
 hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
-function hammingDistance(str1, str2) {}
+function hammingDistance(s1, s2) {
+  if (s1.length !== s2.length) return NaN
+  let count = 0
+  for (var i = 0; i < s1.length; i++) {
+    if (s1.charAt(i) !== s2.charAt(i)) {
+      count++
+  }
+}
+  return count
 /*-----------------------------------------------------------------
 Challenge: 13-mumble
 
@@ -344,7 +378,21 @@ mumble('121'); //=> '1-22-111'
 mumble('!A 2'); //=> '!-AA-   -2222'
 -----------------------------------------------------------------*/
 // Your solution for 13-mumble here:
-function mumble(string) {}
+function mumble(string) {
+  let char
+  let newString = ""
+  for (let i = 1; i < string.length + 1; i++) {
+      if (i == string.length) {
+          char = string.charAt(i-1)
+          newString = newString + char.repeat(i)
+      } else{
+          char = string.charAt(i-1)
+          newString = newString + char.repeat(i) + "-" 
+      }
+
+  }
+  return newString
+}
 /*-----------------------------------------------------------------
 Challenge: 14-fromPairs
 
@@ -362,7 +410,13 @@ fromPairs([ ['a', 1], ['b', 2], ['c', 3] ]) //=> { a: 1, b: 2, c: 3 }
 fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sally", age: 24 }
 -----------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
-function fromPairs(arr) {}
+function fromPairs(arr) {
+  pairObj = {}
+  arr.forEach(element => {
+      pairObj[element[0]] = element[1]
+  });
+  return pairObj
+}
 /*-----------------------------------------------------------------
 Challenge: 15-mergeObjects
 
@@ -380,7 +434,9 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4});  //=> {a: 1, b: 2, c: 3, d: 4}
 mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c: 3, d: 44}
 -----------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
-function mergeObjects(obj1, obj2) {}
+function mergeObjects(target, ...objects) {
+  return Object.assign(target, ...objects);
+}
 /*-----------------------------------------------------------------
 Challenge: 16-findHighestPriced
 
@@ -414,7 +470,18 @@ findHighestPriced([
 //=> { sku: 'b2', price: 50 }
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
-function findHighestPriced(arr) {}
+function findHighestPriced(arr) {
+  function findHighestPriced(arr) {
+    let highest = 0
+    let highestObj 
+    arr.forEach(function(arrObj) {
+      if(arrObj.price > highest ) {
+        highest = arrObj.price
+        highestObj = arrObj
+      }
+    })
+    return highestObj
+  }
 /*-----------------------------------------------------------------
 Challenge: 17-mapArray
 
