@@ -471,7 +471,6 @@ findHighestPriced([
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
 function findHighestPriced(arr) {
-  function findHighestPriced(arr) {
     let highest = 0
     let highestObj 
     arr.forEach(function(arrObj) {
@@ -508,7 +507,13 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-function mapArray(arr, cb) {}
+function mapArray(arr, cb) {
+  mappedArr = []
+  arr.forEach(function(a, b) {
+    mappedArr.push(cb(a,b))
+  } )
+  return mappedArr
+}
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
 
@@ -569,7 +574,19 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 //=> [1, 2, 3, 4, 1, 'a', 'b', 'c']
 -----------------------------------------------------------------*/
 // Your solution for 19-flatten here:
-function flatten(arr) {}
+function flatten(arr) {
+  newArr = []
+
+  arr.forEach(function(element) {
+      if (Array.isArray(element) == true) {
+          newArr = newArr.concat(flatten(element))
+      }
+      else{
+          newArr.push(element)
+      }
+  })
+  return newArr
+}
 /*-----------------------------------------------------------------
 Challenge: 20-isPrime
 
@@ -589,7 +606,14 @@ isPrime(29) //=> true
 isPrime(200) //=> false
 -----------------------------------------------------------------*/
 // Your solution for 20-isPrime here:
-function isPrime(n) {}
+function isPrime(n) {
+  if(Number.isInteger(n / 2) || Number.isInteger( n / 3) ) {
+    return false
+  }
+  else {
+    return true
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 21-primeFactors
 
