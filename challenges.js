@@ -437,7 +437,17 @@ findHighestPriced([
 //=> { sku: 'b2', price: 50 }
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
-function findHighestPriced(arr) {}
+function findHighestPriced(arr) {
+  let highPrice = 0
+  let res
+  arr.forEach(function (item) {
+    if (item.price > highPrice) {
+      highPrice = item.price
+      res = item
+    }
+  })
+  return res
+}
 /*-----------------------------------------------------------------
 Challenge: 17-mapArray
 
@@ -464,7 +474,13 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-function mapArray(arr, cb) {}
+function mapArray(arr, cb) {
+  let newArray = []
+  arr.forEach(function (element, index) {
+    newArray.push(cb(element, index))
+  })
+  return newArray
+}
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
 
@@ -498,7 +514,13 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 //=> {"Yes": 2, "No": 1, "Maybe": 1}
 -----------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
-function reduceArray(arr, acc, value) {}
+function reduceArray(arr, cb, value) {
+  let acc = value
+  arr.forEach(function (element, index) {
+    acc = cb(acc, element, index)
+  })
+  return acc
+}
 /*-----------------------------------------------------------------
 Challenge: 19-flatten
 
@@ -525,7 +547,17 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 //=> [1, 2, 3, 4, 1, 'a', 'b', 'c']
 -----------------------------------------------------------------*/
 // Your solution for 19-flatten here:
-function flatten(arr) {}
+function flatten(arr) {
+  let flattenArr = []
+  arr.forEach(function (element) {
+    if (Array.isArray(element)) {
+      flattenArr = flattenArr.concat(flatten(element))
+    } else {
+      flattenArr.push(element)
+    }
+  })
+  return flattenArr
+}
 /*-----------------------------------------------------------------
 Challenge: 20-isPrime
 
@@ -545,7 +577,13 @@ isPrime(29) //=> true
 isPrime(200) //=> false
 -----------------------------------------------------------------*/
 // Your solution for 20-isPrime here:
-function isPrime(n) {}
+function isPrime(n) {
+  if (n < 2 || !Number.isInteger(n)) return false
+  for (let i = 2; i <= n / 2; i++) {
+    if (Number.isInteger(n / i)) return false
+  }
+  return true
+}
 /*-----------------------------------------------------------------
 Challenge: 21-primeFactors
 
