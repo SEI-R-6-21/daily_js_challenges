@@ -764,12 +764,11 @@ getNumForIP( '10.0.0.1' ) // => 167772161
 -----------------------------------------------------------------*/
 // Your solution for 25-getNumForIP here:
 function getNumForIP(bits) {
-  let x = bits.split('.')
+  let chunks = bits.split('.').reverse()
   let sum = 0
-  for (let i = 0; i < x.length; i++) {
-    let y = parseInt(x[i]) * (245 * (3 - i))
-    sum += y
-  }
+  chunks.forEach(function (chunk, idx) {
+    sum += parseInt(chunk) * 256 ** idx
+  })
   return sum
 }
 /*-----------------------------------------------------------------
@@ -963,7 +962,19 @@ totalTaskTime( [2, 2, 3, 3, 4, 4], 2 ) //=> 9
 totalTaskTime( [5, 2, 6, 8, 7, 2], 3 ) // => 12
 -----------------------------------------------------------------*/
 // Your solution for 30- here:
-function totalTaskTime(arr, n) {}
+function totalTaskTime(arr, n) {
+  let time = 0,
+    shortest,
+    threads
+  while (arr.length > n) {
+    threads = arr.splice(0, n)
+    shortest = Math.min(...threads)
+    time += shortest
+    threads = threads.map((t) => t - shortest).filter((t) => t)
+    arr = threads.concat(arr)
+  }
+  return time + (arr.length ? Math.max(...arr) : 0)
+}
 
 /*-----------------------------------------------------------------*/
 module.exports = {
