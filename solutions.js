@@ -57,10 +57,9 @@ function addOne(num) {
 // Your solution for 02-addTwoNumbers here:
 
 function addTwoNumbers(num1, num2) {
-  if (typeof num1 === 'number' && typeof num2 === 'number') {
-    return num1 + num2
-  } else {
-    return NaN
+  let sum = 0
+  if (isNaN(num1 + num2)) {
+    return toBeNan()
   }
 }
 
