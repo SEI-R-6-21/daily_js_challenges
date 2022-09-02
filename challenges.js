@@ -12,7 +12,9 @@ Examples:
 sayHello() //=> Hello!
 -----------------------------------------------------------------*/
 // Your solution for 00-sayHello (example) here:
-function sayHello() {}
+function sayHello() {
+  return 'Hello!'
+}
 /*-----------------------------------------------------------------
 Challenge: 01-addOne
 
@@ -28,7 +30,9 @@ addOne(1) //=> 2
 addOne(-5) //=> -4
 -----------------------------------------------------------------*/
 // Your solution for 01-addOne here:
-function addOne(num) {}
+function addOne(num) {
+  return num + 1
+}
 /*-----------------------------------------------------------------
 Challenge: 02-addTwoNumbers
 
@@ -47,7 +51,9 @@ addTwoNumbers(0, 0) //=> 0
 addTwoNumbers('Hello', 5) //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 02-addTwoNumbers here:
-function addTwoNumbers(num1, num2) {}
+function addTwoNumbers(num1, num2) {
+  return parseInt(num1 + num2)
+}
 /*-----------------------------------------------------------------
 Challenge: 03-sumNumbers
 
@@ -66,7 +72,13 @@ sumNumbers([2, 10, -5]) //=> 7
 sumNumbers([]) //=> 0
 -----------------------------------------------------------------*/
 // Your solution for 03-sumNumbers here:
-function sumNumbers(nums) {}
+function sumNumbers(nums) {
+  let sum = 0
+  for (let i = 0; i < nums.length; i += 1) {
+    sum += nums[i]
+  }
+  return sum
+}
 /*-----------------------------------------------------------------
 Challenge: 04-addList
 
@@ -85,7 +97,13 @@ add(1,50,1.23) //=> 52.23
 add(7,-12) //=> -5
 -----------------------------------------------------------------*/
 // Your solution for 04-addList here:
-function addList() {}
+function addList() {
+  let sum = 0
+  for (let i = 0; i < arguments.length; i++) {
+    sum += arguments[i]
+  }
+  return sum
+}
 /*-----------------------------------------------------------------
 Challenge: 05-computeRemainder
 
@@ -105,7 +123,13 @@ computeRemainder(4,0) //=> Infinity
 computeRemainder(10.5, 3) //=> 1.5
 -----------------------------------------------------------------*/
 // Your solution for 05-computeRemainder:
-function computeRemainder(n1, n2) {}
+function computeRemainder(n1, n2) {
+  if (n1 == 0 || n2 == 0) {
+    return Infinity
+  } else {
+    return n1 % n2
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 06-range
 
@@ -124,7 +148,17 @@ range(1,1) //=> []
 range(5,2) //=> "First argument must be less than second"
 -----------------------------------------------------------------*/
 // Your solution for 06-range here:
-function range(n1, n2) {}
+function range(n1, n2) {
+  if (n1 <= n2) {
+    let arr = []
+    for (let i = n1; i < n2; i++) {
+      arr.push(i)
+    }
+    return arr
+  } else {
+    return 'First argument must be less than second'
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 07-reverseUpcaseString
 
@@ -139,7 +173,14 @@ Examples:
 reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES" 
 -----------------------------------------------------------------*/
 // Your solution for 07-reverseUpcaseString here:
-function reverseUpcaseString(string) {}
+function reverseUpcaseString(string) {
+  let newString = ''
+
+  for (let i = string.length - 1; i >= 0; i--) {
+    newString += string[i]
+  }
+  return newString.toUpperCase()
+}
 /*-----------------------------------------------------------------
 Challenge: 08-removeEnds
 
@@ -156,7 +197,15 @@ removeEnds('SEI Rocks!'); //=> "DI Rocks"
 removeEnds('a'); //=> "" (empty string)
 -----------------------------------------------------------------*/
 // Your solution for 08-removeEnds here:
-function removeEnds(string) {}
+function removeEnds(string) {
+  let newString = string.slice(0, -1)
+  let newString2 = newString.slice(1)
+  if (string.length < 3) {
+    return ''
+  } else {
+    return newString2
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 09-charCount
 
@@ -175,7 +224,15 @@ charCount('hello') //=> { h: 1, e: 1, l: 2, o: 1 }
 charCount('Today is fantastic!') //=> { T: 1, o: 1, d: 1, a: 3, y: 1, ' ': 2, i: 2, s: 2, f: 1, n: 1, t: 2, c: 1, '!': 1 }
 -----------------------------------------------------------------*/
 // Your solution for 09-charCount here:
-function charCount(string) {}
+function charCount(string) {
+  let Obj = {}
+  for (letter of string) {
+    if (!Obj[letter]) Obj[letter] = 1
+    else Obj[letter]++
+  }
+
+  return Obj
+}
 /*-----------------------------------------------------------------
 Challenge: 10-formatWithPadding
 
@@ -197,7 +254,17 @@ formatWithPadding(42, '*', 10); //=> "********42"
 formatWithPadding(1234, '*', 3); //=> "1234"
 -----------------------------------------------------------------*/
 // Your solution for 10-formatWithPadding here:
-function formatWithPadding(n, char, length) {}
+function formatWithPadding(n, char, length) {
+  let nString = n + ''
+  if (nString.length >= length) {
+    console.log(nString)
+  } else {
+    do {
+      nString = char + nString
+    } while (nString.length < length)
+  }
+  return nString
+}
 /*-----------------------------------------------------------------
 Challenge: 11-isPalindrome
 
@@ -218,7 +285,19 @@ isPalindrome('A nut for a jar of tuna'); //=> true
 isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
-function isPalindrome(string) {}
+function isPalindrome(string) {
+  let newString = ''
+  for (let i = string.length - 1; i >= 0; i--) {
+    newString += string[i]
+  }
+  newString = newString.replace(/\s/g, '').toLowerCase()
+  string = string.replace(/\s/g, '').toLowerCase()
+  if (string === newString.toLowerCase()) {
+    return true
+  } else {
+    return false
+  }
+}
 /*-----------------------------------------------------------------
 Challenge: 12-hammingDistance
 
@@ -240,7 +319,25 @@ hammingDistance('!!!!', '****'); //=> 4
 hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
-function hammingDistance(str1, str2) {}
+function hammingDistance(str1, str2) {
+  let count = 0
+  let sort = 0
+  if (str1.length !== str2.length) {
+    return NaN
+  } else {
+    while (sort < str1.length) {
+      for (let i = 0; i < str1.length; i++) {
+        if (str1[i] != str2[i]) {
+          sort++
+          count++
+        } else {
+          sort++
+        }
+      }
+    }
+  }
+  return count
+}
 /*-----------------------------------------------------------------
 Challenge: 13-mumble
 
@@ -260,7 +357,22 @@ mumble('121'); //=> '1-22-111'
 mumble('!A 2'); //=> '!-AA-   -2222'
 -----------------------------------------------------------------*/
 // Your solution for 13-mumble here:
-function mumble(string) {}
+function mumble(string) {
+  let newString = ''
+  let set = 0
+
+  while (set < string.length) {
+    for (let i = 0; i < string.length; i++) {
+      set++
+      newString += string[i].repeat(i + 1)
+      if (i != string.length - 1) {
+        newString += '-'
+      }
+    }
+  }
+  return newString
+}
+
 /*-----------------------------------------------------------------
 Challenge: 14-fromPairs
 
@@ -278,7 +390,13 @@ fromPairs([ ['a', 1], ['b', 2], ['c', 3] ]) //=> { a: 1, b: 2, c: 3 }
 fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sally", age: 24 }
 -----------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
-function fromPairs(arr) {}
+function fromPairs(arr) {
+  let obj = {}
+  for (let i = 0; i < arr.length; i++) {
+    obj[arr[i][0]] = arr[i][1]
+  }
+  return obj
+}
 /*-----------------------------------------------------------------
 Challenge: 15-mergeObjects
 
@@ -296,7 +414,14 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4});  //=> {a: 1, b: 2, c: 3, d: 4}
 mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c: 3, d: 44}
 -----------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
-function mergeObjects(obj1, obj2) {}
+function mergeObjects(obj1, ...objects) {
+  objects.forEach((obj) => {
+    for (key in obj) {
+      obj1[key] = obj[key]
+    }
+  })
+  return obj1
+}
 /*-----------------------------------------------------------------
 Challenge: 16-findHighestPriced
 
@@ -330,7 +455,15 @@ findHighestPriced([
 //=> { sku: 'b2', price: 50 }
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
-function findHighestPriced(arr) {}
+function findHighestPriced(arr) {
+  result = arr[0]
+  for (i = 1; i < arr.length; i++) {
+    if (arr[i].price > result.price) {
+      result = arr[i]
+    }
+  }
+  return result
+}
 /*-----------------------------------------------------------------
 Challenge: 17-mapArray
 
@@ -357,7 +490,18 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-function mapArray(arr, cb) {}
+function mapArray(arr, cb) {
+  let newArr = []
+  for (let i = 0; i < arr.length; i++) {
+    let f = arr[i]
+    if (typeof arr[i] === 'number') {
+      newArr.push(cb(f))
+    } else {
+      newArr.push(`${cb(f, i)}`)
+    }
+  }
+  return newArr
+}
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
 
@@ -391,7 +535,27 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 //=> {"Yes": 2, "No": 1, "Maybe": 1}
 -----------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
-function reduceArray(arr, acc, value) {}
+
+function reduceArray(arr, acc, value) {
+  let i = 0
+  while (i < arr.length)
+    if (typeof arr[i] == 'number') {
+      let prev = acc(value, arr[i], i)
+      value = prev
+      i++
+      if (i == arr.length) {
+        return value
+      }
+    } else {
+      value = acc(value, arr[i])
+
+      i++
+      if (i == arr.length) {
+        return value
+      }
+    }
+}
+
 /*-----------------------------------------------------------------
 Challenge: 19-flatten
 
@@ -414,7 +578,7 @@ Examples:
 flatten( [1, [2, 3]] );
 //=> [1, 2, 3]  (a new array) 
 
-flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
+flatten(e);
 //=> [1, 2, 3, 4, 1, 'a', 'b', 'c']
 -----------------------------------------------------------------*/
 // Your solution for 19-flatten here:
