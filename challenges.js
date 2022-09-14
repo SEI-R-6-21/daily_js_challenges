@@ -933,6 +933,7 @@ function totalTaskTime(arr, n) {
     arr = threads.concat(arr);
   }
   return time + (arr.length ? Math.max(...arr) : 0);
+  
 }
 
 /*-----------------------------------------------------------------*/
