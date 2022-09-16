@@ -180,7 +180,7 @@ reverseUpcaseString("SEI Rocks!"); //=> "!SKCOR IES"
 function reverseUpcaseString(string) {
   let results = ''
   for (let i = 0; i < string.length; i++) {
-    results = string.charAt[i].toUppercase() + results
+    results = string.charAt(i).toUppercase() + results
   }
   return results
 }
@@ -278,7 +278,15 @@ isPalindrome('A nut for a jar of tuna'); //=> true
 isPalindrome(''); //=> true
 -----------------------------------------------------------------*/
 // Your solution for 11-isPalindrome here:
-function isPalindrome(string) {}
+function isPalindrome(string) {
+  string = string.toLowerCase()
+  // loop to replace spaces
+  while (string.includes(' ')) string = string.replace(' ', '')
+  for (let i = 0; i < Math.floor(string.length / 2); i++) {
+    if (string.charAt(i) !== string.charAt(string.length - i - 1)) return false
+  }
+  return true
+}
 /*-----------------------------------------------------------------
 Challenge: 12-hammingDistance
 
@@ -300,7 +308,14 @@ hammingDistance('!!!!', '****'); //=> 4
 hammingDistance('abc', 'ab'); //=> NaN
 -----------------------------------------------------------------*/
 // Your solution for 12-hammingDistance here:
-function hammingDistance(str1, str2) {}
+function hammingDistance(str1, str2) {
+  if (str1.length !== str2.length) return NaN
+  let count = 0
+  for (let i = 0; i < str1.length; i++) {
+    if (str1.charAt(i) !== str2.charAt(i)) count++
+  }
+  return count
+}
 /*-----------------------------------------------------------------
 Challenge: 13-mumble
 
@@ -320,7 +335,13 @@ mumble('121'); //=> '1-22-111'
 mumble('!A 2'); //=> '!-AA-   -2222'
 -----------------------------------------------------------------*/
 // Your solution for 13-mumble here:
-function mumble(string) {}
+function mumble(string) {
+  let res = ''
+  for (let i = 0; i < string.length; i++) {
+    res += ((i || '') && '-') + string.charAt(i).repeat(i + 1)
+  }
+  return res
+}
 /*-----------------------------------------------------------------
 Challenge: 14-fromPairs
 
@@ -338,7 +359,13 @@ fromPairs([ ['a', 1], ['b', 2], ['c', 3] ]) //=> { a: 1, b: 2, c: 3 }
 fromPairs([ ['name', 'Sam"], ['age', 24], ['name', 'Sally'] ]) //=> { name: "Sally", age: 24 }
 -----------------------------------------------------------------*/
 // Your solution for 14-fromPairs here:
-function fromPairs(arr) {}
+function fromPairs(arr) {
+  let object = {}
+  for (let i = 0; i < arr.length; i++) {
+    object[arr[i][0]] = arr[i][1]
+  }
+  return object
+}
 /*-----------------------------------------------------------------
 Challenge: 15-mergeObjects
 
@@ -356,7 +383,14 @@ mergeObjects({a: 1, b: 2, c: 3}, {d: 4});  //=> {a: 1, b: 2, c: 3, d: 4}
 mergeObjects({a: 1, b: 2, c: 3}, {d: 4}, {b: 22, d: 44});  //=> {a: 1, b: 22, c: 3, d: 44}
 -----------------------------------------------------------------*/
 // Your solution for 15-mergeObjects here:
-function mergeObjects(obj1, obj2) {}
+function mergeObjects(obj1, ...obj2) {
+  obj2.forEach(function (object) {
+    for (let key in object) {
+      obj1[key] = object[key]
+    }
+  })
+  return obj1
+}
 /*-----------------------------------------------------------------
 Challenge: 16-findHighestPriced
 
@@ -390,7 +424,17 @@ findHighestPriced([
 //=> { sku: 'b2', price: 50 }
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
-function findHighestPriced(arr) {}
+function findHighestPriced(arr) {
+  let highestPriced = 0
+  let mostExpensivest
+  arr.forEach(function (item) {
+    if (item.price > highestPriced) {
+      highestPriced = item.price
+      mostExpensivest = item
+    }
+  })
+  return mostExpensivest
+}
 /*-----------------------------------------------------------------
 Challenge: 17-mapArray
 
@@ -417,7 +461,13 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-function mapArray(arr, cb) {}
+function mapArray(arr, cb) {
+  mappedArr = []
+  arr.forEach(function (a, b) {
+    mappedArr.push(cb(a, b))
+  })
+  return mappedArr
+}
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
 
@@ -451,7 +501,12 @@ reduceArray( ['Yes', 'No', 'Yes', 'Maybe'], function(acc, v) {
 //=> {"Yes": 2, "No": 1, "Maybe": 1}
 -----------------------------------------------------------------*/
 // Your solution for 18-reduceArray here:
-function reduceArray(arr, acc, value) {}
+function reduceArray(arr, acc, value) {
+  for (let i = 0; i < arr.length; i++) {
+    value = acc(value, arr[i], i)
+  }
+  return value
+}
 /*-----------------------------------------------------------------
 Challenge: 19-flatten
 
@@ -478,7 +533,17 @@ flatten( [1, [2, [3, [4]]], 1, 'a', ['b', 'c']] );
 //=> [1, 2, 3, 4, 1, 'a', 'b', 'c']
 -----------------------------------------------------------------*/
 // Your solution for 19-flatten here:
-function flatten(arr) {}
+function flatten(arr) {
+  let flattenArray = []
+  arr.forEach(function (element) {
+    if (Array.isArray(element) == true) {
+      flattenArray = flattenArray.concat(flatten(element))
+    } else {
+      flattenArray.push(element)
+    }
+  })
+  return flattenArray
+}
 /*-----------------------------------------------------------------
 Challenge: 20-isPrime
 
@@ -498,7 +563,17 @@ isPrime(29) //=> true
 isPrime(200) //=> false
 -----------------------------------------------------------------*/
 // Your solution for 20-isPrime here:
-function isPrime(n) {}
+function isPrime(n) {
+  for (let i = 2; i < n; i++) {
+    if (n <= 1) {
+      return false
+    }
+    if (n % i == 0) {
+      return false
+    }
+  }
+  return true
+}
 /*-----------------------------------------------------------------
 Challenge: 21-primeFactors
 
@@ -522,7 +597,16 @@ primeFactors(105) //=> [3, 5, 7]
 primeFactors(200) //=> [2, 2, 2, 5, 5]
 -----------------------------------------------------------------*/
 // Your solution for 21-primeFactors here:
-function primeFactors(n) {}
+function primeFactors(n) {
+  let factors = []
+  for (let i = 2; i <= n; i++) {
+    if (n % i === 0) {
+      factors.push(i)
+      n /= i
+    }
+  }
+  return factors
+}
 /*-----------------------------------------------------------------
 Challenge: 22-intersection
 
