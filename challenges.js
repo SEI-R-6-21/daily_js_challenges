@@ -627,7 +627,14 @@ intersection(['a', 1], [true, 'a', 15]) //=> ['a']
 intersection([1, 'a', true, 1, 1], [true, 1, 'b', 1]) //=> [1, true, 1]
 -----------------------------------------------------------------*/
 // Your solution for 22-intersection here:
-function intersection(arr1, arr2) {}
+function intersection(arr1, arr2) {
+  let result = []
+  let array2 = [...arr2]
+  arr1.forEach((value) => {
+    let index = array2.indexOf(value)
+    if (index > -1) result.push(array2.splice(index, 1)[0])
+  })
+}
 /*-----------------------------------------------------------------
 Challenge: 23-balancedBrackets
 
@@ -649,7 +656,19 @@ balancedBrackets( '[(])' ) // => false
 balancedBrackets( '[({}[])]' ) // => true
 -----------------------------------------------------------------*/
 // Your solution for 23-balancedBrackets here:
-function balancedBrackets(string) {}
+function balancedBrackets(string) {
+  if (string.length % 2) return false
+  let stack = []
+  for (let i = 0; i < string.length; i++) {
+    let b = string.charAt(i)
+    if ('([{'.includes(b)) {
+      stack.push(b)
+    } else {
+      if (!'(){}[]'.includes(stack.pop() + b)) return false
+    }
+  }
+  return true
+}
 /*-----------------------------------------------------------------
 Challenge: 24-isWinningTicket
 
@@ -675,7 +694,17 @@ isWinningTicket( [ ['ABC', 66], ['dddd', 100], ['Hello', 108] ] ) // => true
 isWinningTicket( [ ['ABC', 66], ['dddd', 15], ['Hello', 108] ] ) // => false
 -----------------------------------------------------------------*/
 // Your solution for 24-isWinningTicket here:
-function isWinningTicket(arr) {}
+function isWinningTicket(arr) {
+  let winner = true
+  for (let i = 0; i < arr.length; i++) {
+    let charFromNumber = String.fromCharCode(arr[i][1])
+    if (!arr[i][0].includes(charFromNumber)) {
+      winner = false
+      break
+    }
+  }
+  return winner
+}
 /*-----------------------------------------------------------------
 Challenge: 25-getNumForIP
 
@@ -701,7 +730,14 @@ getNumForIP( '192.156.99.15' ) // => 3231474447
 getNumForIP( '10.0.0.1' ) // => 167772161
 -----------------------------------------------------------------*/
 // Your solution for 25-getNumForIP here:
-function getNumForIP(bits) {}
+function getNumForIP(bits) {
+  let chunks = bits.split('.').reverse()
+  let sum = 0
+  chunks.forEach(function (chunk, index) {
+    sum += parseInt(chunk) * 256 ** index
+  })
+  return sum
+}
 /*-----------------------------------------------------------------
 Challenge: 26-toCamelCase
 
