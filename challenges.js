@@ -628,7 +628,6 @@ function primeFactors(n) {
     array.push(n)
     return array
   }
-  //  ?
   return array
 }
 /*-----------------------------------------------------------------
