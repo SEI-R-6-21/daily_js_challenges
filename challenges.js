@@ -440,6 +440,7 @@ findHighestPriced([
 ]);
 //=> { sku: 'c3', price: 50 } 
 
+
 findHighestPriced([
   { sku: 'a1', price: 25 },
   { sku: 'b2', price: 50 },
@@ -449,7 +450,26 @@ findHighestPriced([
 //=> { sku: 'b2', price: 50 }
 -----------------------------------------------------------------*/
 // Your solution for 16-findHighestPriced here:
-function findHighestPriced(arr) {}
+
+// const findHighestPriced = arr=>arr.sort((a,b)=>a.price-b.price)[arr.length-1];
+
+// used this for help https://stackoverflow.com/questions/4020796/finding-the-max-value-of-an-attribute-in-an-array-of-objects
+const findHighestPriced = arr=>arr.find(elem=>elem.price===Math.max(...arr.map(elem=>elem.price)))
+
+console.log("\n=================\nCHALLENGE 16: findHighestPriced\n=================")
+console.log(findHighestPriced([
+  { sku: 'a1', price: 25 },
+  { sku: 'b2', price: 5 },
+  { sku: 'c3', price: 50 },
+  { sku: 'd4', price: 10 }
+]))
+console.log(findHighestPriced([
+  { sku: 'a1', price: 25 },
+  { sku: 'b2', price: 50 },
+  { sku: 'c3', price: 50 },
+  { sku: 'd4', price: 10 }
+]))
+
 /*-----------------------------------------------------------------
 Challenge: 17-mapArray
 
@@ -476,7 +496,18 @@ mapArray( ['rose', 'tulip', 'daisy'], function(f, i) {
 //=> ["1 - rose", "2 - tulip", "3 - daisy"]
 -----------------------------------------------------------------*/
 // Your solution for 17-mapArray here:
-function mapArray(arr, cb) {}
+const mapArray=(arr, cb) =>{
+  let mappedArr = [];
+  arr.forEach((elem, i)=>mappedArr.push(cb(elem,i)))
+  return mappedArr;
+}
+console.log("\n=================\nCHALLENGE 17: mapArray\n=================")
+console.log(mapArray([1, 2, 3], function(n) {
+  return n * 2;
+} ))
+console.log(mapArray(['rose', 'tulip', 'daisy'], function(f, i) {
+  return `${i + 1} - ${f}`;
+}))
 /*-----------------------------------------------------------------
 Challenge: 18-reduceArray
 
