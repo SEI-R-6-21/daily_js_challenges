@@ -84,10 +84,10 @@ function addTwoNumbers(num1, num2) {
 // Your solution for 03-sumNumbers here:
 
 /*--- okay solution ---*/
-function sumNumbers(nums) {
+function sumNumbers(numbers) {
   var sum = 0
-  for (var i = 0; i < nums.length; i++) {
-    sum += nums[i]
+  for (var i = 0; i < numbers.length; i++) {
+    sum += numbers[i]
   }
   return sum
 }
